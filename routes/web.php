@@ -2,6 +2,7 @@
 
 use App\Http\Livewire\Pages\Admin\AddUser;
 use App\Http\Livewire\Pages\Admin\ViewUser;
+use App\Http\Livewire\Pages\Cuti;
 use App\Http\Livewire\Pages\Dashboard;
 use Illuminate\Support\Facades\Route;
 
@@ -23,5 +24,6 @@ Route::get('/', function () {
 Route::get('/dashboard', Dashboard::class)->middleware(['auth'])->name('dashboard');
 Route::get('/admin/view-user', ViewUser::class)->middleware(['auth'])->name('view-user');
 Route::get('/admin/add-user', AddUser::class)->middleware(['auth'])->name('add-user');
+Route::get('/cuti', Cuti::class)->middleware(['auth'])->name('cuti');
 
 require __DIR__ . '/auth.php';

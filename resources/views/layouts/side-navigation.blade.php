@@ -5,6 +5,14 @@ $links = [
         'text' => 'Dashboard',
         'is_multi' => false,
         'roles' => 'all',
+        'icon' => 'fas fa-fire', // contoh ikon Font Awesome
+    ],
+    [
+        'href' => 'cuti',
+        'text' => 'Cuti',
+        'is_multi' => false,
+        'roles' => 'all',
+        'icon' => 'fas fa-calendar', // contoh ikon Font Awesome
     ],
     [
         'href' => [
@@ -16,6 +24,7 @@ $links = [
         'text' => 'User',
         'is_multi' => true,
         'roles' => 'admin',
+        'icon' => 'fas fa-users', // contoh ikon Font Awesome
     ],
 ];
 $navigation_links = json_decode(json_encode($links), false);
@@ -27,13 +36,12 @@ $navigation_links = json_decode(json_encode($links), false);
             <a href="{{ route('dashboard') }}">{{ config('app.name', 'Laravel') }}</a>
         </div>
         @foreach ($navigation_links as $link)
-            @if ($link->roles == 'admin' &&
-    auth()->user()->hasRole('admin'))
+            @if ($link->roles == 'admin' && auth()->user()->hasRole('admin'))
                 <ul class="sidebar-menu">
                     @if (!$link->is_multi)
                         <li class="{{ Request::routeIs($link->href) ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route($link->href) }}"><i
-                                    class="fas fa-fire"></i><span>{{ $link->text }}</span></a>
+                                    class="{{ $link->icon }}"></i><span>{{ $link->text }}</span></a>
                         </li>
                     @else
                         <li class="menu-header">{{ $link->text }}</li>
@@ -49,7 +57,7 @@ $navigation_links = json_decode(json_encode($links), false);
 
                             <li class="dropdown {{ $is_active ? 'active' : '' }}">
                                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                        class="fas fa-chart-bar"></i> <span>{{ $section->section_text }}</span></a>
+                                        class="{{ $link->icon }}"></i> <span>{{ $section->section_text }}</span></a>
                                 <ul class="dropdown-menu">
                                     @foreach ($section->section_list as $child)
                                         <li class="{{ Request::routeIs($child->href) ? 'active' : '' }}"><a
@@ -66,7 +74,7 @@ $navigation_links = json_decode(json_encode($links), false);
                     @if (!$link->is_multi)
                         <li class="{{ Request::routeIs($link->href) ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route($link->href) }}"><i
-                                    class="fas fa-fire"></i><span>{{ $link->text }}</span></a>
+                                    class="{{ $link->icon }}"></i><span>{{ $link->text }}</span></a>
                         </li>
                     @else
                         <li class="menu-header">{{ $link->text }}</li>
@@ -82,7 +90,7 @@ $navigation_links = json_decode(json_encode($links), false);
 
                             <li class="dropdown {{ $is_active ? 'active' : '' }}">
                                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                        class="fas fa-chart-bar"></i> <span>{{ $section->section_text }}</span></a>
+                                        class="{{ $link->icon }}"></i> <span>{{ $section->section_text }}</span></a>
                                 <ul class="dropdown-menu">
                                     @foreach ($section->section_list as $child)
                                         <li class="{{ Request::routeIs($child->href) ? 'active' : '' }}"><a
