@@ -9,6 +9,9 @@
     <div class="card">
         <div class="card-header">
             <h4>Detail Tugas</h4>
+            <div class="card-header-action">
+                <input type="text" class="form-control" placeholder="Search" wire:model="searchTerm">
+            </div>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -26,7 +29,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($tugas as $index => $leaveRequest)
+                        @forelse ($tugas as $leaveRequest)
                         <tr>
                             <td>{{ $leaveRequest->name }}</td>
                             <td>{{ $leaveRequest->nik }}</td>
