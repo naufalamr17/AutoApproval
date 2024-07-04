@@ -22,6 +22,13 @@ $links = [
         'icon' => 'far fa-envelope', // contoh ikon Font Awesome
     ],
     [
+        'href' => 'view-tugas',
+        'text' => 'List Tugas',
+        'is_multi' => false,
+        'roles' => 'all',
+        'icon' => 'far fa-envelope', // contoh ikon Font Awesome
+    ],
+    [
         'href' => [
             [
                 'section_text' => 'Admin Panel',
