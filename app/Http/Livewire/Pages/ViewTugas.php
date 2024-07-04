@@ -62,7 +62,7 @@ class ViewTugas extends Component
         // Add more replacements as needed
 
         // Generate a filename for the output Word document
-        $outputFileName = 'leave_request_' . $leaveRequest->id . '.docx';
+        $outputFileName = 'Surat Tugas ' . $leaveRequest->name . '.docx';
 
         // Save the generated document
         $outputFilePath = public_path('\leave_requests' . $outputFileName);
