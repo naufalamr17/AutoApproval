@@ -38,6 +38,16 @@
                             <td>{{ $leaveRequest->end_date }}</td>
                             <td>{{ $leaveRequest->destination_place }}</td>
                             <td>{{ $leaveRequest->activity_purpose }}</td>
+                            <td class="d-flex justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <button class="btn btn-sm btn-success" wire:click="print({{ $leaveRequest->id }})">
+                                        <i class="fas fa-print"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger ml-2" wire:click="delete({{ $leaveRequest->id }})">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
                         </tr>
                         @empty
                         <tr>

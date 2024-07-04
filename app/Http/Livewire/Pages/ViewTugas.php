@@ -29,4 +29,10 @@ class ViewTugas extends Component
             'tugas' => $tugas,
         ]);
     }
+
+    public function delete($id)
+    {
+        LeaveRequest::findOrFail($id)->delete();
+        session()->flash('success', 'Leave request deleted successfully.');
+    }
 }
