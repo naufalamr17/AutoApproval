@@ -15,6 +15,13 @@ $links = [
         'icon' => 'fas fa-calendar', // contoh ikon Font Awesome
     ],
     [
+        'href' => 'surat-tugas',
+        'text' => 'Form Surat Tugas',
+        'is_multi' => false,
+        'roles' => 'all',
+        'icon' => 'far fa-envelope', // contoh ikon Font Awesome
+    ],
+    [
         'href' => [
             [
                 'section_text' => 'Admin Panel',
