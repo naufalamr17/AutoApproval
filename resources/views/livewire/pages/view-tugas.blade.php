@@ -45,9 +45,15 @@
                                     <button class="btn btn-sm btn-success" wire:click="print({{ $leaveRequest->id }})">
                                         <i class="fas fa-print"></i>
                                     </button>
-                                    <button class="btn btn-sm btn-primary ml-2" wire:click="approve({{ $leaveRequest->id }})">
+                                    @if ($leaveRequest->status == 'Waiting Approval')
+                                    <button class="btn btn-primary ml-2" wire:click="approve">
                                         <i class="fas fa-check"></i>
                                     </button>
+                                    @else
+                                    <button class="btn btn-primary ml-2" disabled>
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                    @endif
                                     <button class="btn btn-sm btn-danger ml-2" wire:click="delete({{ $leaveRequest->id }})">
                                         <i class="fas fa-trash"></i>
                                     </button>

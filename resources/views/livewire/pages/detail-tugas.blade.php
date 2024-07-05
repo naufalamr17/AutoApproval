@@ -67,10 +67,15 @@
                     <i class="fas fa-print"></i>
                 </button>
 
-                <!-- Tombol Approve -->
+                @if ($tugas->status == 'Waiting Approval')
                 <button class="btn btn-primary ml-2" wire:click="approve">
                     <i class="fas fa-check"></i>
                 </button>
+                @else
+                <button class="btn btn-primary ml-2" disabled>
+                    <i class="fas fa-check"></i>
+                </button>
+                @endif
 
                 <!-- Tombol Kembali -->
                 <a href="{{ route('view-tugas') }}" class="btn btn-secondary ml-2">
