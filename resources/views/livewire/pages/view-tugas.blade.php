@@ -25,6 +25,7 @@
                             <th scope="col">Tanggal Selesai</th>
                             <th scope="col">Tempat</th>
                             <th scope="col">Tujuan</th>
+                            <th scope="col">Status</th>
                             <th scope="col" width="5%">Action</th>
                         </tr>
                     </thead>
@@ -38,10 +39,14 @@
                             <td>{{ $leaveRequest->end_date }}</td>
                             <td>{{ $leaveRequest->destination_place }}</td>
                             <td>{{ $leaveRequest->activity_purpose }}</td>
+                            <td>{{ $leaveRequest->status }}</td>
                             <td class="d-flex justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <button class="btn btn-sm btn-success" wire:click="print({{ $leaveRequest->id }})">
                                         <i class="fas fa-print"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-primary ml-2" wire:click="approve({{ $leaveRequest->id }})">
+                                        <i class="fas fa-check"></i>
                                     </button>
                                     <button class="btn btn-sm btn-danger ml-2" wire:click="delete({{ $leaveRequest->id }})">
                                         <i class="fas fa-trash"></i>

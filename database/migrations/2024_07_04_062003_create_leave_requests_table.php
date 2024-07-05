@@ -22,6 +22,7 @@ class CreateLeaveRequestsTable extends Migration
             $table->date('end_date');
             $table->string('destination_place');
             $table->text('activity_purpose');
+            $table->string('status')->default("Waiting Approval");
             $table->timestamps();
         });
     }

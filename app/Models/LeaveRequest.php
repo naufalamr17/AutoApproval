@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class LeaveRequest extends Model
 {
@@ -17,5 +18,6 @@ class LeaveRequest extends Model
         'end_date',
         'destination_place',
         'activity_purpose',
+        'status',
     ];
 }

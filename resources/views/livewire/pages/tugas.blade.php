@@ -15,14 +15,13 @@
             <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
             <div class="form-group">
-                <x-label for="name" :value="__('Nama')" />
-                <x-input id="name" type="text" name="name" :value="old('name')" wire:model='name' />
-            </div>
-
-            <!-- NIK -->
-            <div class="form-group">
                 <x-label for="nik" :value="__('NIK')" />
                 <x-input id="nik" type="text" name="nik" :value="old('nik')" wire:model='nik' />
+            </div>
+
+            <div class="form-group">
+                <x-label for="name" :value="__('Nama')" />
+                <x-input id="name" type="text" name="name" :value="old('name')" wire:model='name' />
             </div>
 
             <!-- Jabatan -->
