@@ -6,6 +6,9 @@ use App\Models\LeaveRequest;
 use Livewire\Component;
 use Livewire\WithPagination;
 use PhpOffice\PhpWord\TemplateProcessor;
+use Carbon\Carbon;
+
+Carbon::setLocale('id');
 
 class ViewTugas extends Component
 {
@@ -42,6 +45,8 @@ class ViewTugas extends Component
         // Retrieve leave request data based on $id
         $leaveRequest = LeaveRequest::find($id);
 
+        Carbon::setLocale('id');
+
         // Check if leave request exists
         if (!$leaveRequest) {
             return redirect()->back()->with('error', 'Leave request not found.');
@@ -55,8 +60,10 @@ class ViewTugas extends Component
         $templateProcessor->setValue('Name', $leaveRequest->name);
         $templateProcessor->setValue('NIK', $leaveRequest->nik);
         $templateProcessor->setValue('Position', $leaveRequest->position);
-        $templateProcessor->setValue('Start', $leaveRequest->start_date);
-        $templateProcessor->setValue('End', $leaveRequest->end_date);
+        $startDate = Carbon::parse($leaveRequest->start_date)->translatedFormat('d F Y');
+        $endDate = Carbon::parse($leaveRequest->end_date)->translatedFormat('d F Y');
+        $templateProcessor->setValue('Start', $startDate);
+        $templateProcessor->setValue('End', $endDate);
         $templateProcessor->setValue('Destination', $leaveRequest->destination_place);
         $templateProcessor->setValue('Purpose', $leaveRequest->activity_purpose);
         // Add more replacements as needed
