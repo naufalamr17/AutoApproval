@@ -46,11 +46,11 @@
                                         <i class="fas fa-print"></i>
                                     </button>
                                     @if ($leaveRequest->status == 'Waiting Approval')
-                                    <button class="btn btn-primary ml-2" wire:click="approve">
+                                    <button class="btn btn-primary ml-2" wire:click="approve({{ $leaveRequest->id }})">
                                         <i class="fas fa-check"></i>
                                     </button>
                                     @else
-                                    <button class="btn btn-primary ml-2" disabled>
+                                    <button class="btn btn-primary ml-2" disabled style="cursor: not-allowed;">
                                         <i class="fas fa-check"></i>
                                     </button>
                                     @endif
