@@ -3,49 +3,31 @@
 namespace App\Http\Livewire\Pages;
 
 use App\Models\LeaveRequest;
-use Livewire\Component;
-use Livewire\WithPagination;
-use PhpOffice\PhpWord\TemplateProcessor;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
+use PhpOffice\PhpWord\TemplateProcessor;
 
-Carbon::setLocale('id');
-
-class ViewTugas extends Component
+class DetailTugas extends Component
 {
-    use WithPagination;
+    public $tugasId;
+    public $tugas;
 
-    public $searchTerm;
-
-    protected $paginationTheme = 'bootstrap';
-    protected $updatesQueryString = ['searchTerm'];
+    public function mount($id)
+    {
+        $this->tugasId = $id;
+        $this->tugas = LeaveRequest::findOrFail($id);
+    }
 
     public function render()
     {
-        $searchTerm = '%' . $this->searchTerm . '%';
-        $tugas = LeaveRequest::where('name', 'like', $searchTerm)
-            ->orWhere('nik', 'like', $searchTerm)
-            ->orWhere('position', 'like', $searchTerm)
-            ->orWhere('destination_place', 'like', $searchTerm)
-            ->orWhere('activity_purpose', 'like', $searchTerm)
-            ->orWhere('status', 'like', $searchTerm)
-            ->paginate(10);
-
-        return view('livewire.pages.view-tugas', [
-            'tugas' => $tugas,
-        ]);
+        return view('livewire.pages.detail-tugas');
     }
 
-    public function delete($id)
-    {
-        LeaveRequest::findOrFail($id)->delete();
-        session()->flash('success', 'Leave request deleted successfully.');
-    }
-
-    public function print($id)
+    public function print()
     {
         // Retrieve leave request data based on $id
-        $leaveRequest = LeaveRequest::find($id);
+        $leaveRequest = LeaveRequest::find($this->tugasId);
 
         Carbon::setLocale('id');
 
@@ -81,10 +63,10 @@ class ViewTugas extends Component
         return response()->download($outputFilePath, $outputFileName)->deleteFileAfterSend(true);
     }
 
-    public function approve($id)
+    public function approve()
     {
         // Retrieve leave request data based on $id
-        $leaveRequest = LeaveRequest::find($id);
+        $leaveRequest = LeaveRequest::find($this->tugasId);
 
         // Check if leave request exists
         if (!$leaveRequest) {
@@ -99,6 +81,6 @@ class ViewTugas extends Component
         session()->flash('success', 'Leave request approved successfully.');
 
         // You can redirect or just refresh the page
-        return redirect()->back();
+        return redirect()->route('view-tugas');
     }
 }

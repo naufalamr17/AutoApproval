@@ -29,7 +29,7 @@ class Tugas extends Component
     {
         $this->validate();
 
-        LeaveRequest::create([
+        $leaveRequest = LeaveRequest::create([
             'name' => $this->name,
             'nik' => $this->nik,
             'position' => $this->position,
@@ -38,6 +38,11 @@ class Tugas extends Component
             'destination_place' => $this->destination_place,
             'activity_purpose' => $this->activity_purpose,
         ]);
+
+        $leaveRequestId = $leaveRequest->id;
+        $routing = route('detail-tugas', ['id' => $leaveRequestId]);
+
+        // dd($routing);
         
         // Reset form fields
         $this->reset();

@@ -4,6 +4,7 @@ use App\Http\Livewire\Pages\Admin\AddUser;
 use App\Http\Livewire\Pages\Admin\ViewUser;
 use App\Http\Livewire\Pages\Cuti;
 use App\Http\Livewire\Pages\Dashboard;
+use App\Http\Livewire\Pages\DetailTugas;
 use App\Http\Livewire\Pages\Tugas;
 use App\Http\Livewire\Pages\ViewTugas;
 use Illuminate\Support\Facades\Route;
@@ -29,5 +30,7 @@ Route::get('/admin/add-user', AddUser::class)->middleware(['auth'])->name('add-u
 Route::get('/cuti', Cuti::class)->middleware(['auth'])->name('cuti');
 Route::get('/surat-tugas', Tugas::class)->middleware(['auth'])->name('surat-tugas');
 Route::get('/surat-tugas/view', ViewTugas::class)->middleware(['auth'])->name('view-tugas');
+Route::get('/detail-tugas/{id}', DetailTugas::class)->middleware(['auth'])->name('detail-tugas');
+
 
 require __DIR__ . '/auth.php';

@@ -51,6 +51,9 @@
                                     <button class="btn btn-sm btn-danger ml-2" wire:click="delete({{ $leaveRequest->id }})">
                                         <i class="fas fa-trash"></i>
                                     </button>
+                                    <a href="{{ route('detail-tugas', ['id' => $leaveRequest->id]) }}" class="btn btn-sm btn-info ml-2">
+                                        <i class="fas fa-eye"></i> Detail
+                                    </a>
                                 </div>
                             </td>
                         </tr>
