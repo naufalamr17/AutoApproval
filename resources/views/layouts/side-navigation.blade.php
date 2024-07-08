@@ -15,16 +15,14 @@ $links = [
         'icon' => 'fas fa-calendar', // contoh ikon Font Awesome
     ],
     [
-        'href' => 'surat-tugas',
-        'text' => 'Form Surat Tugas',
-        'is_multi' => false,
-        'roles' => 'all',
-        'icon' => 'far fa-envelope', // contoh ikon Font Awesome
-    ],
-    [
-        'href' => 'view-tugas',
-        'text' => 'List Tugas',
-        'is_multi' => false,
+        'href' => [
+            [
+                'section_text' => 'Surat Tugas',
+                'section_list' => [['href' => 'surat-tugas', 'text' => 'Form Surat Tugas'], ['href' => 'view-tugas', 'text' => 'List Surat Tugas']],
+            ],
+        ],
+        'text' => '',
+        'is_multi' => true,
         'roles' => 'all',
         'icon' => 'far fa-envelope', // contoh ikon Font Awesome
     ],
