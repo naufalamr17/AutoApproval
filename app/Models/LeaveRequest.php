@@ -11,6 +11,7 @@ class LeaveRequest extends Model
     use HasFactory;
 
     protected $fillable = [
+        'no',
         'name',
         'nik',
         'position',

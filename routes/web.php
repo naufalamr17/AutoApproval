@@ -20,10 +20,11 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('welcome');
 
+Route::get('/', Dashboard::class)->middleware(['auth'])->name('dashboard');
 Route::get('/dashboard', Dashboard::class)->middleware(['auth'])->name('dashboard');
 Route::get('/admin/view-user', ViewUser::class)->middleware(['auth'])->name('view-user');
 Route::get('/admin/add-user', AddUser::class)->middleware(['auth'])->name('add-user');

@@ -29,23 +29,16 @@
             <!-- Password -->
             <div class="form-group">
                 <x-label for="password" :value="__('Password')" />
-                @if (Route::has('password.request'))
-                    <div class="float-right">
-                        <a href="{{ route('password.request') }}" class="text-small">
-                            {{ __('Forgot your password?') }}
-                        </a>
-                    </div>
-                @endif
                 <x-input id="password" type="password" name="password" required autocomplete="current-password" />
             </div>
 
             <!-- Remember Me -->
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember_me">
                     <label class="custom-control-label" for="remember_me">{{ __('Remember Me') }}</label>
                 </div>
-            </div>
+            </div> -->
 
             <div class="d-flex align-items-center justify-content-between">
                 <a href="{{ route('register') }}" class="text-small">Register</a>
