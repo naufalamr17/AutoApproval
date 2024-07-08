@@ -24,6 +24,7 @@ class ViewTugas extends Component
     {
         $searchTerm = '%' . $this->searchTerm . '%';
         $tugas = LeaveRequest::where('name', 'like', $searchTerm)
+            ->orWhere('no', 'like', $searchTerm)
             ->orWhere('nik', 'like', $searchTerm)
             ->orWhere('position', 'like', $searchTerm)
             ->orWhere('destination_place', 'like', $searchTerm)
