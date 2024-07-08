@@ -62,6 +62,7 @@ class ViewTugas extends Component
         $imagePath = public_path('\mlp.jpeg');
 
         // Replace placeholders in the template with actual data
+        $templateProcessor->setValue('No', $leaveRequest->no);
         $templateProcessor->setValue('Name', $leaveRequest->name);
         $templateProcessor->setValue('NIK', $leaveRequest->nik);
         $templateProcessor->setValue('Position', $leaveRequest->position);
@@ -71,7 +72,26 @@ class ViewTugas extends Component
         $templateProcessor->setValue('End', $endDate);
         $templateProcessor->setValue('Destination', $leaveRequest->destination_place);
         $templateProcessor->setValue('Purpose', $leaveRequest->activity_purpose);
-        $templateProcessor->setImageValue('Sign', array('path' => $imagePath, 'width' => 70, 'height' => 70, 'ratio' => true));
+        if ($leaveRequest->status == 'Waiting Approval') {
+            $templateProcessor->setValue('Sign', "");
+            $templateProcessor->setValue('Date', "");
+        } else {
+            $templateProcessor->setImageValue('Sign', array('path' => $imagePath, 'width' => 70, 'height' => 70, 'ratio' => true));
+
+            $status = $leaveRequest->status;
+
+            // Extract timestamp substring
+            $timestamp = substr($status, strpos($status, ' at ') + 4, 19);
+
+            // Parse date usixng Carbon
+            $date = Carbon::parse($timestamp);
+
+            // Format the date as needed
+            $formattedDate = $date->translatedFormat('d F Y');
+            
+            $templateProcessor->setValue('Date', $formattedDate);
+        }
+        $templateProcessor->setValue('Year', Carbon::now()->year);
         // Add more replacements as needed
 
         // Generate a filename for the output Word document
@@ -96,7 +116,7 @@ class ViewTugas extends Component
         }
 
         // Approve the leave request (this could be setting a status or other logic)
-        $leaveRequest->status = 'Approved by ' . Auth::user()->name;
+        $leaveRequest->status = 'Approved by ' . Auth::user()->name . ' at ' . Carbon::now() . ' WIB';
         $leaveRequest->save();
 
         // Optionally, you can add some flash message to notify the user

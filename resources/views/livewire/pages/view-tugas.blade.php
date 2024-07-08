@@ -18,6 +18,7 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
+                            <th scope="col">Nomor</th>
                             <th scope="col">Nama</th>
                             <th scope="col">NIK</th>
                             <th scope="col">Jabatan</th>
@@ -32,6 +33,7 @@
                     <tbody>
                         @forelse ($tugas as $leaveRequest)
                         <tr>
+                            <td>{{ $leaveRequest->no }}</td>
                             <td>{{ $leaveRequest->name }}</td>
                             <td>{{ $leaveRequest->nik }}</td>
                             <td>{{ $leaveRequest->position }}</td>

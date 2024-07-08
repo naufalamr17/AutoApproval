@@ -29,7 +29,15 @@ class Tugas extends Component
     {
         $this->validate();
 
+        // Mendapatkan nomor terakhir
+        $lastLeaveRequest = LeaveRequest::latest('id')->first();
+        $lastNumber = $lastLeaveRequest ? intval(substr($lastLeaveRequest->no, -4)) : 0;
+
+        // Mengenerate nomor baru
+        $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
+
         $leaveRequest = LeaveRequest::create([
+            'no' => now()->format('ym') . $newNumber, // Contoh format: yymm0001
             'name' => $this->name,
             'nik' => $this->nik,
             'position' => $this->position,
@@ -43,10 +51,10 @@ class Tugas extends Component
         $routing = route('detail-tugas', ['id' => $leaveRequestId]);
 
         // dd($routing);
-        
+
         // Reset form fields
         $this->reset();
-        
+
         session()->flash('success', 'Leave request successfully submitted.');
     }
 
