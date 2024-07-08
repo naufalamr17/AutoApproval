@@ -58,6 +58,9 @@ class ViewTugas extends Component
         $templatePath = public_path('\SuratTugasPerjalananDinas.docx');
         $templateProcessor = new TemplateProcessor($templatePath);
 
+        // Path ke gambar yang akan disisipkan
+        $imagePath = public_path('\mlp.jpeg');
+
         // Replace placeholders in the template with actual data
         $templateProcessor->setValue('Name', $leaveRequest->name);
         $templateProcessor->setValue('NIK', $leaveRequest->nik);
@@ -68,6 +71,7 @@ class ViewTugas extends Component
         $templateProcessor->setValue('End', $endDate);
         $templateProcessor->setValue('Destination', $leaveRequest->destination_place);
         $templateProcessor->setValue('Purpose', $leaveRequest->activity_purpose);
+        $templateProcessor->setImageValue('Sign', array('path' => $imagePath, 'width' => 70, 'height' => 70, 'ratio' => true));
         // Add more replacements as needed
 
         // Generate a filename for the output Word document
