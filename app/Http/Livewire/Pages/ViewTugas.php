@@ -19,6 +19,7 @@ class ViewTugas extends Component
 
     public $sortColumn = 'id'; // Default sorting column
     public $sortDirection = 'asc'; // Default sorting direction
+    public $statusFilter = '';
 
     protected $paginationTheme = 'bootstrap';
     protected $updatesQueryString = ['searchTerm'];
@@ -44,13 +45,22 @@ class ViewTugas extends Component
     public function render()
     {
         $searchTerm = '%' . $this->searchTerm . '%';
-        $tugas = LeaveRequest::where('name', 'like', $searchTerm)
-            ->orWhere('no', 'like', $searchTerm)
-            ->orWhere('nik', 'like', $searchTerm)
-            ->orWhere('position', 'like', $searchTerm)
-            ->orWhere('destination_place', 'like', $searchTerm)
-            ->orWhere('activity_purpose', 'like', $searchTerm)
-            ->orderBy($this->sortColumn, $this->sortDirection)
+
+        $query = LeaveRequest::query()
+            ->where(function ($q) use ($searchTerm) {
+                $q->where('name', 'like', $searchTerm)
+                    ->orWhere('no', 'like', $searchTerm)
+                    ->orWhere('nik', 'like', $searchTerm)
+                    ->orWhere('position', 'like', $searchTerm)
+                    ->orWhere('destination_place', 'like', $searchTerm)
+                    ->orWhere('activity_purpose', 'like', $searchTerm);
+            });
+
+        if ($this->statusFilter) {
+            $query->where('status', 'like', $this->statusFilter . '%');
+        }
+
+        $tugas = $query->orderBy($this->sortColumn, $this->sortDirection)
             ->paginate(10);
 
         return view('livewire.pages.view-tugas', [

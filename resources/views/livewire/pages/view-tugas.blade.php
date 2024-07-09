@@ -9,8 +9,14 @@
     <div class="card">
         <div class="card-header">
             <h4>Detail Tugas</h4>
-            <div class="card-header-action">
-                <input type="text" class="form-control" placeholder="Search" wire:model="searchTerm">
+            <div class="card-header-action d-flex">
+                <input type="text" class="form-control" placeholder="Search" style="height: 42px;" wire:model="searchTerm">
+                <select wire:model="statusFilter" class="form-control ml-2">
+                    <option value="">All Status</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Rejected">Rejected</option>
+                    <option value="Waiting Approval">Waiting Approval</option>
+                </select>
             </div>
         </div>
         <div class="card-body">
@@ -62,7 +68,6 @@
                             <td>{{ $leaveRequest->status }}</td>
                             <td class="d-flex justify-content-between">
                                 <div class="d-flex align-items-center">
-
                                     @php
                                     $status = $leaveRequest->status;
                                     $rejectedStatus = explode(' by ', $status)[0];
@@ -113,7 +118,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    $().tooltip();
-</script>
