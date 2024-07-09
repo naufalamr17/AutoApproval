@@ -127,4 +127,25 @@ class ViewTugas extends Component
         // You can redirect or just refresh the page
         return redirect()->back();
     }
+
+    public function reject($id)
+    {
+        // Retrieve leave request data based on $id
+        $leaveRequest = LeaveRequest::find($id);
+
+        // Check if leave request exists
+        if (!$leaveRequest) {
+            return redirect()->back()->with('error', 'Leave request not found.');
+        }
+
+        // Approve the leave request (this could be setting a status or other logic)
+        $leaveRequest->status = 'Rejected by ' . Auth::user()->name . ' at ' . Carbon::now() . ' WIB';
+        $leaveRequest->save();
+
+        // Optionally, you can add some flash message to notify the user
+        session()->flash('success', 'Leave request rejected successfully.');
+
+        // You can redirect or just refresh the page
+        return redirect()->back();
+    }
 }

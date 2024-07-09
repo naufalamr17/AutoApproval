@@ -69,11 +69,17 @@
 
                 @if ($tugas->status == 'Waiting Approval')
                 <button class="btn btn-primary ml-2" wire:click="approve">
-                    <i class="fas fa-check"></i>
+                    <i class="fas fa-check-circle"></i>
+                </button>
+                <button class="btn btn-danger ml-2" wire:click="reject">
+                    <i class="fas fa-times-circle"></i>
                 </button>
                 @else
                 <button class="btn btn-primary ml-2" disabled>
-                    <i class="fas fa-check"></i>
+                    <i class="fas fa-check-circle"></i>
+                </button>
+                <button class="btn btn-danger ml-2" disabled>
+                    <i class="fas fa-times-circle"></i>
                 </button>
                 @endif
 
