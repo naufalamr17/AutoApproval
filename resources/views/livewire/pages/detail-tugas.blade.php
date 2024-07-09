@@ -34,11 +34,11 @@
                 <div class="row">
                     <div class="col-6">
                         <x-label for="start_date" :value="__('Tanggal Mulai')" />
-                        <x-input id="start_date" type="date" name="start_date" :value="$tugas->start_date" disabled />
+                        <x-input id="start_date" type="text" name="start_date" :value="$tugas->start_date" disabled />
                     </div>
                     <div class="col-6">
                         <x-label for="end_date" :value="__('Tanggal Selesai')" />
-                        <x-input id="end_date" type="date" name="end_date" :value="$tugas->end_date" disabled />
+                        <x-input id="end_date" type="text" name="end_date" :value="$tugas->end_date" disabled />
                     </div>
                 </div>
             </div>
