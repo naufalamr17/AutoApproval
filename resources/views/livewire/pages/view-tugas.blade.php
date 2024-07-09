@@ -10,7 +10,7 @@
         <div class="card-header">
             <h4>Detail Tugas</h4>
             <div class="card-header-action d-flex">
-                <input type="text" class="form-control" placeholder="Search" style="height: 42px;" wire:model="searchTerm">
+                <input type="text" class="form-control" placeholder="Search" wire:model="searchTerm">
                 <select wire:model="statusFilter" class="form-control ml-2">
                     <option value="">All Status</option>
                     <option value="Approved">Approved</option>
@@ -74,11 +74,11 @@
                                     @endphp
 
                                     @if (trim($rejectedStatus) == 'Approved')
-                                    <button class="btn btn-sm btn-secondary" wire:click="edit({{ $leaveRequest->id }})">
+                                    <button class="btn btn-sm btn-secondary" disabled style="cursor: not-allowed;">
                                         <i class="fas fa-pencil-alt"></i>
                                     </button>
                                     @else
-                                    <button class="btn btn-sm btn-secondary" disabled style="cursor: not-allowed;">
+                                    <button class="btn btn-sm btn-secondary" wire:click="edit({{ $leaveRequest->id }})">
                                         <i class="fas fa-pencil-alt"></i>
                                     </button>
                                     @endif
@@ -127,4 +127,63 @@
             </div>
         </div>
     </div>
+
+    <!-- Edit Modal -->
+    @if ($leaveRequestId)
+    <div class="modal fade show" style="display: block; overflow: auto;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Leave Request</h5>
+                </div>
+                <div class="modal-body">
+                    <form wire:submit.prevent="update">
+                        <div class="form-group">
+                            <label for="no">Nomor</label>
+                            <input type="text" id="no" class="form-control" wire:model="no" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Nama</label>
+                            <input type="text" id="name" class="form-control" wire:model="name">
+                            @error('name') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="nik">NIK</label>
+                            <input type="text" id="nik" class="form-control" wire:model="nik">
+                            @error('nik') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="position">Jabatan</label>
+                            <input type="text" id="position" class="form-control" wire:model="position">
+                            @error('position') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="start_date">Tanggal Mulai</label>
+                            <input type="date" id="start_date" class="form-control" wire:model="start_date">
+                            @error('start_date') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="end_date">Tanggal Selesai</label>
+                            <input type="date" id="end_date" class="form-control" wire:model="end_date">
+                            @error('end_date') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="destination_place">Tempat</label>
+                            <input type="text" id="destination_place" class="form-control" wire:model="destination_place">
+                            @error('destination_place') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="activity_purpose">Tujuan</label>
+                            <input type="text" id="activity_purpose" class="form-control" wire:model="activity_purpose">
+                            @error('activity_purpose') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <button type="button" class="btn btn-secondary" aria-label="Close" wire:click="$set('leaveRequestId', null)">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop fade show" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #000; opacity: 0.5; z-index: 1040;"></div>
+    @endif
 </div>

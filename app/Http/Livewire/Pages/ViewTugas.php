@@ -24,6 +24,26 @@ class ViewTugas extends Component
     protected $paginationTheme = 'bootstrap';
     protected $updatesQueryString = ['searchTerm'];
 
+    public $leaveRequestId;
+    public $no;
+    public $name;
+    public $nik;
+    public $position;
+    public $start_date;
+    public $end_date;
+    public $destination_place;
+    public $activity_purpose;
+
+    protected $rules = [
+        'name' => 'required|string|max:255',
+        'nik' => 'required|string|max:255',
+        'position' => 'required|string|max:255',
+        'start_date' => 'required|date',
+        'end_date' => 'required|date',
+        'destination_place' => 'required|string|max:255',
+        'activity_purpose' => 'required|string|max:255',
+    ];
+
     public function sortBy($column)
     {
         if ($this->sortColumn === $column) {
@@ -178,5 +198,41 @@ class ViewTugas extends Component
 
         // You can redirect or just refresh the page
         return redirect()->back();
+    }
+
+    public function edit($id)
+    {
+        $leaveRequest = LeaveRequest::findOrFail($id);
+
+        $this->leaveRequestId = $leaveRequest->id;
+        $this->no = $leaveRequest->no;
+        $this->name = $leaveRequest->name;
+        $this->nik = $leaveRequest->nik;
+        $this->position = $leaveRequest->position;
+        $this->start_date = $leaveRequest->start_date;
+        $this->end_date = $leaveRequest->end_date;
+        $this->destination_place = $leaveRequest->destination_place;
+        $this->activity_purpose = $leaveRequest->activity_purpose;
+    }
+
+    public function update()
+    {
+        $this->validate();
+
+        $leaveRequest = LeaveRequest::findOrFail($this->leaveRequestId);
+        $leaveRequest->update([
+            'name' => $this->name,
+            'nik' => $this->nik,
+            'position' => $this->position,
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
+            'destination_place' => $this->destination_place,
+            'activity_purpose' => $this->activity_purpose,
+            'status' => 'Waiting Approval',
+        ]);
+
+        session()->flash('success', 'Leave request successfully updated.');
+
+        $this->reset();
     }
 }
