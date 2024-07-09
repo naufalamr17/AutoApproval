@@ -53,6 +53,7 @@ class DetailTugas extends Component
         $templateProcessor->setValue('End', $endDate);
         $templateProcessor->setValue('Destination', $leaveRequest->destination_place);
         $templateProcessor->setValue('Purpose', $leaveRequest->activity_purpose);
+        $templateProcessor->setValue('Region', $leaveRequest->region);
         if ($leaveRequest->status == 'Waiting Approval') {
             $templateProcessor->setValue('Sign', "");
             $templateProcessor->setValue('Date', "");

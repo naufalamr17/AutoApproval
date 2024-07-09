@@ -18,6 +18,7 @@ class CreateLeaveRequestsTable extends Migration
             $table->string('no');
             $table->string('name');
             $table->string('nik');
+            $table->string('region');
             $table->string('position');
             $table->date('start_date');
             $table->date('end_date');

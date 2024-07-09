@@ -14,6 +14,7 @@ class LeaveRequest extends Model
         'no',
         'name',
         'nik',
+        'region',
         'position',
         'start_date',
         'end_date',
