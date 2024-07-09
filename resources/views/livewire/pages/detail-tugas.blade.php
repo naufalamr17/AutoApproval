@@ -62,11 +62,20 @@
             </div>
 
             <div class="form-group d-flex">
-                <!-- Tombol Print -->
+                @php
+                $status = $tugas->status;
+                $rejectedStatus = explode(' by ', $status)[0];
+                @endphp
+
+                @if (trim($rejectedStatus) == 'Rejected')
+                <button class="btn btn-success" disabled style="cursor: not-allowed;">
+                    <i class="fas fa-print"></i>
+                </button>
+                @else
                 <button class="btn btn-success" wire:click="print">
                     <i class="fas fa-print"></i>
                 </button>
-
+                @endif
                 @if ($tugas->status == 'Waiting Approval')
                 <button class="btn btn-primary ml-2" wire:click="approve">
                     <i class="fas fa-check-circle"></i>
@@ -75,10 +84,10 @@
                     <i class="fas fa-times-circle"></i>
                 </button>
                 @else
-                <button class="btn btn-primary ml-2" disabled>
+                <button class="btn btn-primary ml-2" disabled style="cursor: not-allowed;">
                     <i class="fas fa-check-circle"></i>
                 </button>
-                <button class="btn btn-danger ml-2" disabled>
+                <button class="btn btn-danger ml-2" disabled style="cursor: not-allowed;">
                     <i class="fas fa-times-circle"></i>
                 </button>
                 @endif

@@ -18,15 +18,33 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">Nomor</th>
-                            <th scope="col">Nama</th>
-                            <th scope="col">NIK</th>
-                            <th scope="col">Jabatan</th>
-                            <th scope="col">Tanggal Mulai</th>
-                            <th scope="col">Tanggal Selesai</th>
-                            <th scope="col">Tempat</th>
-                            <th scope="col">Tujuan</th>
-                            <th scope="col">Status</th>
+                            <th scope="col" wire:click="sortBy('no')" style="cursor: pointer;">
+                                Nomor {{ $this->sortIcon('no') }}
+                            </th>
+                            <th scope="col" wire:click="sortBy('name')" style="cursor: pointer;">
+                                Nama {{ $this->sortIcon('name') }}
+                            </th>
+                            <th scope="col" wire:click="sortBy('nik')" style="cursor: pointer;">
+                                NIK {{ $this->sortIcon('nik') }}
+                            </th>
+                            <th scope="col" wire:click="sortBy('position')" style="cursor: pointer;">
+                                Jabatan {{ $this->sortIcon('position') }}
+                            </th>
+                            <th scope="col" wire:click="sortBy('start_date')" style="cursor: pointer;">
+                                Tanggal Mulai {{ $this->sortIcon('start_date') }}
+                            </th>
+                            <th scope="col" wire:click="sortBy('end_date')" style="cursor: pointer;">
+                                Tanggal Selesai {{ $this->sortIcon('end_date') }}
+                            </th>
+                            <th scope="col" wire:click="sortBy('destination_place')" style="cursor: pointer;">
+                                Tempat {{ $this->sortIcon('destination_place') }}
+                            </th>
+                            <th scope="col" wire:click="sortBy('activity_purpose')" style="cursor: pointer;">
+                                Tujuan {{ $this->sortIcon('activity_purpose') }}
+                            </th>
+                            <th scope="col" wire:click="sortBy('status')" style="cursor: pointer;">
+                                Status {{ $this->sortIcon('status') }}
+                            </th>
                             <th scope="col" width="5%">Action</th>
                         </tr>
                     </thead>
@@ -44,9 +62,21 @@
                             <td>{{ $leaveRequest->status }}</td>
                             <td class="d-flex justify-content-between">
                                 <div class="d-flex align-items-center">
+
+                                    @php
+                                    $status = $leaveRequest->status;
+                                    $rejectedStatus = explode(' by ', $status)[0];
+                                    @endphp
+
+                                    @if (trim($rejectedStatus) == 'Rejected')
+                                    <button class="btn btn-sm btn-success" disabled style="cursor: not-allowed;">
+                                        <i class="fas fa-print"></i>
+                                    </button>
+                                    @else
                                     <button class="btn btn-sm btn-success" wire:click="print({{ $leaveRequest->id }})">
                                         <i class="fas fa-print"></i>
                                     </button>
+                                    @endif
                                     @if ($leaveRequest->status == 'Waiting Approval')
                                     <button class="btn btn-sm btn-primary ml-2" wire:click="approve({{ $leaveRequest->id }})">
                                         <i class="fas fa-check-circle"></i>

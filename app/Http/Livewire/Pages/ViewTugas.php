@@ -17,8 +17,29 @@ class ViewTugas extends Component
 
     public $searchTerm;
 
+    public $sortColumn = 'id'; // Default sorting column
+    public $sortDirection = 'asc'; // Default sorting direction
+
     protected $paginationTheme = 'bootstrap';
     protected $updatesQueryString = ['searchTerm'];
+
+    public function sortBy($column)
+    {
+        if ($this->sortColumn === $column) {
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortDirection = 'asc';
+        }
+        $this->sortColumn = $column;
+    }
+
+    public function sortIcon($column)
+    {
+        if ($this->sortColumn === $column) {
+            return $this->sortDirection === 'asc' ? '↑' : '↓';
+        }
+        return '';
+    }
 
     public function render()
     {
@@ -29,7 +50,7 @@ class ViewTugas extends Component
             ->orWhere('position', 'like', $searchTerm)
             ->orWhere('destination_place', 'like', $searchTerm)
             ->orWhere('activity_purpose', 'like', $searchTerm)
-            ->orWhere('status', 'like', $searchTerm)
+            ->orderBy($this->sortColumn, $this->sortDirection)
             ->paginate(10);
 
         return view('livewire.pages.view-tugas', [
@@ -90,7 +111,7 @@ class ViewTugas extends Component
 
             // Format the date as needed
             $formattedDate = $date->translatedFormat('d F Y');
-            
+
             $templateProcessor->setValue('Date', $formattedDate);
         }
         $templateProcessor->setValue('Year', Carbon::now()->year);
