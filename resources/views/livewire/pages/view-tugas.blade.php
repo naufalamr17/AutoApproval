@@ -10,7 +10,7 @@
         <div class="card-header">
             <h4>Detail Tugas</h4>
             <div class="card-header-action d-flex">
-                <input type="text" class="form-control" placeholder="Search" wire:model="searchTerm">
+                <input type="text" class="form-control" placeholder="Search" wire:model="searchTerm" style="height: 42px;">
                 <select wire:model="statusFilter" class="form-control ml-2">
                     <option value="">All Status</option>
                     <option value="Approved">Approved</option>
